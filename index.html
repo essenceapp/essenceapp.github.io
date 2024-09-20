@@ -1,6 +1,36 @@
+<!DOCTYPE html>
+<html>
+
 <head>
-    <title>essence_test</title>
+    <title>OS Detection</title>
+    <script>
+        function detectOS() {
+            // Get the user's operating system information
+            const userAgent = navigator.userAgent;
+
+            // Check for iOS
+            if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
+                // Redirect to App Store
+                window.location.href = 'https://apps.apple.com/app/essence-cycle-syncing/id6478631392';
+            }
+            // Check for Android
+            else if (userAgent.match(/Android/i)) {
+                // Redirect to Google Play
+                window.location.href = 'https://play.google.com/store/apps/details?id=app.theessence.business.android';
+            }
+            // Default redirection or message 
+            else {
+                // Redirect to a default website
+                window.location.href = 'https://www.theessence.app';
+            }
+        }
+
+        // Call the function on page load
+        window.onload = detectOS;
+    </script>
 </head>
+
 <body>
-    <p> Essence test</p>
 </body>
+
+</html>
