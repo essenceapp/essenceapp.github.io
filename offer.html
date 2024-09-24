@@ -3,9 +3,48 @@
 
 <head>
     <title>Redirecting...</title>
-    <link rel="canonical" href="https://b2b.theessence.app/index.html" />
-    <meta charset="utf-8" />
-    <meta http-equiv="refresh" content="0; url=https://b2b.theessence.app/index.html" />
+    <script>
+        function detectOS() {
+            // essenceapp.github.io/offer.html?code=discount-50-custom
+            // Get the user's operating system information
+            const userAgent = navigator.userAgent;
+
+            // Extract URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const androidCode = urlParams.get("code");
+            console.log(androidCode);
+
+            // Check for iOS
+            if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
+                // Redirect to App Store
+                window.location.href = 'https://apps.apple.com/app' +
+                    '/essence-cycle-syncing/id6478631392';
+            }
+            // Check for Android
+            else if (userAgent.match(/Android/i)) {
+                // Redirect to Google Play
+                if (androidCode == null) {
+                    window.location.href = 'https://play.google.com/store/apps/' +
+                        'details?id=app.theessence.business.android';
+
+                    return;
+                }
+
+                window.location.href = 'https://play.google.com/store/apps/' +
+                    'details?id=app.theessence.business.android' +
+                    '&url=link%3A%2F%2Fb2b.theessence.app%2Foffer%3Dcode=' +
+                    androidCode;
+            }
+            // Default redirection 
+            else {
+                // Redirect to a default website
+                window.location.href = 'https://www.theessence.app';
+            }
+        }
+
+        // Call the function on page load
+        window.onload = detectOS;
+    </script>
 </head>
 
 <body>
