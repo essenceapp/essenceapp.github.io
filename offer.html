@@ -11,19 +11,25 @@
 
             // Extract URL parameters
             const urlParams = new URLSearchParams(window.location.search);
-            const androidCode = urlParams.get("code");
-            console.log(androidCode);
+            const promoCode = urlParams.get("code");
+            console.log(promoCode);
 
             // Check for iOS
             if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i)) {
                 // Redirect to App Store
-                window.location.href = 'https://apps.apple.com/app' +
-                    '/essence-cycle-syncing/id6478631392';
+                if (promoCode == null) {
+                    window.location.href = 'https://apps.apple.com/app' +
+                        '/essence-cycle-syncing/id6478631392';
+                    return;
+                }
+
+                window.location.href = 'https://apps.apple.com/redeem' +
+                    '?ctx=offercodes&id=6478631392&code=' + promoCode;
             }
             // Check for Android
             else if (userAgent.match(/Android/i)) {
                 // Redirect to Google Play
-                if (androidCode == null) {
+                if (promoCode == null) {
                     window.location.href = 'https://play.google.com/store/apps/' +
                         'details?id=app.theessence.business.android';
 
@@ -33,7 +39,7 @@
                 window.location.href = 'https://play.google.com/store/apps/' +
                     'details?id=app.theessence.business.android' +
                     '&url=link%3A%2F%2Fb2b.theessence.app%2Foffer%3Dcode=' +
-                    androidCode;
+                    promoCode;
             }
             // Default redirection 
             else {
